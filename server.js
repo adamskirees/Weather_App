@@ -36,3 +36,14 @@ function listening() {
   }
 
   
+
+  // STEPS TO INSALL
+//1. Node already installed on machine
+//2. npm init
+//3. npm install express
+//4. npm install nodemon  
+//4.2 FOR NODEMON permission Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+//5. npm install
+//6 INSTALL MIDDLEWARE
+// 7. npm install body-parser
+// 8  npm install cors
