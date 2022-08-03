@@ -35,6 +35,24 @@ function listening() {
     console.log(`running on localhost ${port}`);
   }
 
+  // Callback function to complete GET '/all'
+app.get("/all", (req, res) => {
+  res.send(projectData);
+  console.log(projectData);
+});
+
+// POST Route
+app.post("/show", (req, res) => {
+  console.log(req.body);
+
+  projectData.temp = req.body.temp;
+  projectData.date = req.body.date;
+  projectData.content = req.body.content;
+
+  res.send(projectData);
+  console.log(projectData);
+});
+
   
 
 // STEPS TO INSALL
