@@ -18,8 +18,6 @@ const baseURL =
     });
   };
 
-
-
   //GET function - to pull weather API
   let getWeather = async (url) => {
     let response = await fetch(url);
@@ -29,4 +27,38 @@ const baseURL =
     } catch (error) {
       console.log("error", error);
     }
+    };
+
+    //POST function - to post data
+    let postData = async (url = "", data = {}) => {
+      let response = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000/",
+        },
+        body: JSON.stringify(data),
+      });
+      try {
+        letnewData = await response.json();
+        console.log(newData);
+        return newData;
+      } catch (error) {
+        console.log("error", error);
+      }
+      
+    };
+
+    //GET weather data
+    const updateUI = async () => {
+      let request = await fetch("http://localhost:3000/all");
+      try {
+        const allData = await request.json();
+        document.getElementByuId("temp").innerHTML = allData.temp;
+        document.getElementById("content").innerHTML = allData.content;
+      } catch (error) {
+        console.log("error", error)
+      }
     };
