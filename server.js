@@ -37,7 +37,7 @@ function listening() {
 
   
 
-  // STEPS TO INSALL
+// STEPS TO INSALL
 //1. Node already installed on machine
 //2. npm init
 //3. npm install express
