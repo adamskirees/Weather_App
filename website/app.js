@@ -4,14 +4,13 @@ const baseURL =
   "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=";
 
 
-  
   //Bring in event listener
   let requestAction = (e) => {
     let zipcode = document.getElementById("zip").value;
     let feelings = document.getElementById("feelings").value;
-    getWeather(`${baseURL}${zipcode}${apiKey}`).then(function(data) {
+    getWeather(`${baseURL}${zipcode}${apiKey}`).then(function (data) {
       postData("http://localhost:3000/show", {
-        //temp: temp,
+        temp: data.temp,
         content: feelings,
       }).then(updateUI);
     });
@@ -22,10 +21,10 @@ const baseURL =
 
   //GET function - to pull weather API
   let getWeather = async (url) => {
-    let response = await fetch(url);
+    let response = await fetch (url);
     try {
       let data = await response.json();
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.log("error", error);
     }
@@ -33,18 +32,20 @@ const baseURL =
 
     //POST function - to post data
     let postData = async (url = "", data = {}) => {
-      let response = await fetch(url)
+      let response = await fetch(url, {
         method: "POST",
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data),
       });
+ 
+
       try {
         let newData = await response.json();
         console.log(newData);
-        return newData;
+        //return newData;
       } catch (error) {
         console.log("error", error);
-      }
-      
+      };
     };
 
     //GET weather data

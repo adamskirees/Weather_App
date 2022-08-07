@@ -23,6 +23,7 @@ app.use(cors());
 
 // Initialize the main project folder
 app.use(express.static('website'));
+app.use(express.json({ limit: '2mb' }));
 
 // Setup Server
 const port = 3000;
@@ -36,7 +37,7 @@ function listening() {
   }
 
   // Callback function to complete GET '/all'
-app.get("/all", (req, res) => {
+  app.get("/all", (req, res) => {
   res.send(projectData);
   console.log(projectData);
 });
@@ -50,7 +51,7 @@ app.post("/show", (req, res) => {
   projectData.content = req.body.content;
 
   res.send(projectData);
-  console.log(projectData);
+ console.log(projectData);
 });
 
   
