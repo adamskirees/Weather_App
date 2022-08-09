@@ -10,7 +10,7 @@ const baseURL =
     let feelings = document.getElementById("feelings").value;
     getWeather(`${baseURL}${zipcode}${apiKey}`).then(function (data) {
       postData("http://localhost:3000/show", {
-        temp: data.temp,
+        temp: temp,
         content: feelings,
       }).then(updateUI);
     });
@@ -41,8 +41,8 @@ const baseURL =
 
       try {
         let newData = await response.json();
-        console.log(newData);
-        //return newData;
+        //console.log(newData);
+        return newData;
       } catch (error) {
         console.log("error", error);
       };
