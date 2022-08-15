@@ -1,5 +1,5 @@
 // Personal API Key for OpenWeatherMap API
-const apiKey = "&appid=4d4a3eb9d322124aa8855cbdec9d1253";
+const apiKey = "&appid=4d4a3eb9d322124aa8855cbdec9d1253&units=imperial";
 const baseURL =
   "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=";
 
@@ -8,11 +8,13 @@ const baseURL =
   let requestAction = (e) => {
     let zipcode = document.getElementById("zip").value;
     let feelings = document.getElementById("feelings").value;
+   
     getWeather(`${baseURL}${zipcode}${apiKey}`).then(function (data) {
+      const temp = data.main.temp;
       postData("http://localhost:3000/show", {
         temp: temp,
         content: feelings,
-      }).then(updateUI);
+      }).then(retrieveData);
     });
   };
 
@@ -25,6 +27,7 @@ const baseURL =
     try {
       let data = await response.json();
       //console.log(data);
+      return data;
     } catch (error) {
       console.log("error", error);
     }
@@ -49,12 +52,13 @@ const baseURL =
     };
 
     //GET weather data
-    const updateUI = async () => {
+    const retrieveData = async () => {
       let request = await fetch("http://localhost:3000/all");
       try {
         const allData = await request.json();
-        document.getElementById("temp").innerHTML = allData.temp;
+        document.getElementById("temp").innerHTML = Math.round(allData.temp) + 'degrees';
         document.getElementById("content").innerHTML = allData.content;
+        document.getElementById("date").innerHTML = allData.date;
       } catch (error) {
         console.log("error", error)
       }
