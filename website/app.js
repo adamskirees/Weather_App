@@ -3,6 +3,8 @@ const apiKey = "&appid=4d4a3eb9d322124aa8855cbdec9d1253&units=imperial";
 const baseURL =
   "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=";
 
+  let newDate = new Date();
+
 
   //Bring in event listener
   let requestAction = (e) => {
@@ -14,6 +16,7 @@ const baseURL =
       postData("http://localhost:3000/show", {
         temp: temp,
         content: feelings,
+        date: newDate,
       }).then(retrieveData);
     });
   };
